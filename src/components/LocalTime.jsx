@@ -1,12 +1,18 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 function LocalTime() {
+  const [time, setTime] = useState(new Date())
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setTime(new Date());
+    }, 1000);
+    return () => clearInterval(timer);
+  }, []);
   
   return (
     <div>
-      <h1 className='text-white text-2xl text-center'>
-      Mahalliy vaqt
-      </h1>
+      <h2>Local Time</h2>
+      <h4>{time.toLocaleTimeString()}</h4>
     </div>
   )
 }
